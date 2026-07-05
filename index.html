@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Utilería.js — Formulario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <span class="topbar__mark">JS</span>
+    <div>
+      <h1>Utilería.js</h1>
+      <p>Librería de validaciones para formularios — sin frameworks</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ============ FORMULARIO ============ -->
+  <section class="panel">
+    <p class="panel__label">Formulario de registro</p>
+    <h2>Prueba las validaciones en vivo</h2>
+
+    <form id="formRegistro" novalidate>
+
+      <div class="campo">
+        <label for="nombre">Nombre completo (soloLetras)</label>
+        <input type="text" id="nombre" placeholder="Ej. María José Peña" />
+        <div class="error-msg" id="errorNombre"></div>
+      </div>
+
+      <div class="campo">
+        <label for="correo">Correo electrónico (validarCorreo)</label>
+        <input type="email" id="correo" placeholder="tucorreo@dominio.com" />
+        <div class="error-msg" id="errorCorreo"></div>
+      </div>
+
+      <div class="campo">
+        <label for="telefono">Teléfono, exactamente 10 dígitos (validarLongitud)</label>
+        <input type="tel" id="telefono" placeholder="5512345678" />
+        <div class="error-msg" id="errorTelefono"></div>
+      </div>
+
+      <div class="campo">
+        <label for="fechaNacimiento">Fecha de nacimiento (calcularEdad / esMayorDeEdad)</label>
+        <input type="date" id="fechaNacimiento" />
+        <div class="error-msg" id="errorFecha"></div>
+      </div>
+
+      <div class="campo">
+        <label for="password">Contraseña (validarPassword)</label>
+        <input type="password" id="password" placeholder="Mínimo 8 caracteres" />
+        <ul class="requisitos" id="listaRequisitos">
+          <li data-req="mayuscula">Una mayúscula</li>
+          <li data-req="minuscula">Una minúscula</li>
+          <li data-req="numero">Un número</li>
+          <li data-req="especial">Un carácter especial</li>
+          <li data-req="longitud">Mínimo 8 caracteres</li>
+        </ul>
+        <div class="fila" style="margin-top:10px;">
+          <button type="button" class="btn btn--secondary" id="btnGenerarPass">Generar contraseña segura</button>
+        </div>
+      </div>
+
+      <div class="fila" style="margin-top: 20px;">
+        <button type="submit" class="btn">Enviar formulario</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- ============ CONSOLA DE RESULTADOS (visual en la página) ============ -->
+  <section class="panel">
+    <p class="panel__label">Salida</p>
+    <h2>Resultado de validación</h2>
+    <div class="console" id="consola">// Los resultados de validarCorreo(), soloLetras(), etc. aparecerán aquí</div>
+  </section>
+
+  <!-- ============ DEMO DE FUNCIONES LIBRES ============ -->
+  <section class="panel">
+    <p class="panel__label">Sección libre</p>
+    <h2>formatearMoneda(numero, moneda)</h2>
+    <div class="campo">
+      <label for="montoInput">Monto a formatear</label>
+      <input type="text" id="montoInput" placeholder="Ej. 2599.9" />
+    </div>
+    <button type="button" class="btn btn--secondary" id="btnFormatear">Formatear como moneda (MXN)</button>
+    <div class="console" id="consolaMoneda" style="margin-top:14px;">// Resultado de formatearMoneda()</div>
+  </section>
+
+  <p style="text-align:center; margin-top: -10px;">
+    <a href="login.html" style="color:var(--accent); font-size:0.9rem;">Ir al login &rarr;</a>
+  </p>
+
+</main>
+
+<!-- ============ MODAL DE EDAD ============ -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <p class="modal__icono">Edad calculada</p>
+    <p class="modal__edad" id="modalEdadValor">--<span> años</span></p>
+    <p class="modal__estado" id="modalEstado">Esperando fecha de nacimiento...</p>
+    <button class="btn" id="btnCerrarModal">Entendido</button>
+  </div>
+</div>
+
+<footer>
+  utileria.js · repositorio en GitHub · demo desplegada con GitHub Pages
+</footer>
+
+<script src="js/utileria.js"></script>
+<script>
+  const consola = document.getElementById("consola");
+  const modalOverlay = document.getElementById("modalOverlay");
+  const modalEdadValor = document.getElementById("modalEdadValor");
+  const modalEstado = document.getElementById("modalEstado");
+
+  function log(mensaje, esError = false) {
+    const linea = document.createElement("div");
+    linea.textContent = mensaje;
+    if (esError) linea.className = "linea-error";
+    consola.appendChild(linea);
+    consola.scrollTop = consola.scrollHeight;
+  }
+
+  function limpiarConsola() {
+    consola.innerHTML = "";
+  }
+
+  // -------- Validación en vivo: nombre (soloLetras) --------
+  const inputNombre = document.getElementById("nombre");
+  const errorNombre = document.getElementById("errorNombre");
+  inputNombre.addEventListener("input", () => {
+    if (inputNombre.value === "") {
+      errorNombre.textContent = "";
+      return;
+    }
+    errorNombre.textContent = soloLetras(inputNombre.value)
+      ? ""
+      : "Solo se permiten letras y espacios.";
+  });
+
+  // -------- Validación en vivo: correo (validarCorreo) --------
+  const inputCorreo = document.getElementById("correo");
+  const errorCorreo = document.getElementById("errorCorreo");
+  inputCorreo.addEventListener("input", () => {
+    if (inputCorreo.value === "") {
+      errorCorreo.textContent = "";
+      return;
+    }
+    errorCorreo.textContent = validarCorreo(inputCorreo.value)
+      ? ""
+      : "Formato de correo inválido.";
+  });
+
+  // -------- Validación en vivo: teléfono (validarLongitud, exactamente 10 dígitos) --------
+  const inputTelefono = document.getElementById("telefono");
+  const errorTelefono = document.getElementById("errorTelefono");
+  inputTelefono.addEventListener("input", () => {
+    if (inputTelefono.value === "") {
+      errorTelefono.textContent = "";
+      return;
+    }
+    const digitos = inputTelefono.value.replace(/\D/g, "");
+    const esValido = validarLongitud(digitos, 10) && digitos.length === 10;
+    errorTelefono.textContent = esValido ? "" : "El teléfono debe tener exactamente 10 dígitos.";
+  });
+
+  // -------- Fecha de nacimiento: dispara el modal (calcularEdad / esMayorDeEdad) --------
+  const inputFecha = document.getElementById("fechaNacimiento");
+  const errorFecha = document.getElementById("errorFecha");
+
+  inputFecha.addEventListener("change", () => {
+    if (!inputFecha.value) return;
+
+    const edad = calcularEdad(inputFecha.value);
+
+    if (isNaN(edad) || edad < 0) {
+      errorFecha.textContent = "Fecha inválida.";
+      return;
+    }
+    errorFecha.textContent = "";
+
+    const mayor = esMayorDeEdad(inputFecha.value);
+
+    modalEdadValor.innerHTML = `${edad}<span> años</span>`;
+    modalEstado.textContent = mayor
+      ? "✔ Es mayor de edad"
+      : "✘ Es menor de edad";
+    modalOverlay.classList.add("activo");
+
+    console.log(`calcularEdad("${inputFecha.value}") -> ${edad}`);
+    console.log(`esMayorDeEdad("${inputFecha.value}") -> ${mayor}`);
+  });
+
+  document.getElementById("btnCerrarModal").addEventListener("click", () => {
+    modalOverlay.classList.remove("activo");
+  });
+
+  // -------- Contraseña: requisitos en vivo (validarPassword) --------
+  const inputPassword = document.getElementById("password");
+  const requisitos = document.querySelectorAll("#listaRequisitos li");
+
+  inputPassword.addEventListener("input", () => {
+    const val = inputPassword.value;
+    const checks = {
+      mayuscula: /[A-Z]/.test(val),
+      minuscula: /[a-z]/.test(val),
+      numero: /[0-9]/.test(val),
+      especial: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(val),
+      longitud: val.length >= 8,
+    };
+    requisitos.forEach((li) => {
+      const req = li.dataset.req;
+      li.classList.toggle("cumplido", checks[req]);
+    });
+  });
+
+  document.getElementById("btnGenerarPass").addEventListener("click", () => {
+    const nueva = generarPasswordSegura(12);
+    inputPassword.value = nueva;
+    inputPassword.dispatchEvent(new Event("input"));
+    log(`generarPasswordSegura(12) -> "${nueva}"`);
+    console.log(`generarPasswordSegura(12) -> "${nueva}"`);
+  });
+
+  // -------- Envío del formulario: corre TODAS las validaciones obligatorias --------
+  document.getElementById("formRegistro").addEventListener("submit", (e) => {
+    e.preventDefault();
+    limpiarConsola();
+
+    const nombre = inputNombre.value;
+    const correo = inputCorreo.value;
+    const telefono = inputTelefono.value;
+    const telefonoDigitos = telefono.replace(/\D/g, "");
+    const fecha = inputFecha.value;
+    const password = inputPassword.value;
+
+    const resultados = [
+      { fn: `soloLetras("${nombre}")`, ok: soloLetras(nombre) },
+      { fn: `validarCorreo("${correo}")`, ok: validarCorreo(correo) },
+      { fn: `validarLongitud("${telefonoDigitos}", 10)`, ok: validarLongitud(telefonoDigitos, 10) && telefonoDigitos.length === 10 },
+      { fn: `esMayorDeEdad("${fecha}")`, ok: fecha ? esMayorDeEdad(fecha) : false },
+      { fn: `validarPassword(password)`, ok: validarPassword(password) },
+    ];
+
+    let todoValido = true;
+
+    console.log("===== Resultado de validación del formulario =====");
+    resultados.forEach((r) => {
+      log(`${r.fn} -> ${r.ok}`, !r.ok);
+      console.log(`${r.fn} -> ${r.ok}`);
+      if (!r.ok) todoValido = false;
+    });
+
+    if (todoValido) {
+      log("✔ Formulario válido. Listo para enviarse al servidor.");
+      console.log("✔ Formulario válido. Listo para enviarse al servidor.");
+    } else {
+      log("✘ Corrige los campos marcados en rojo antes de continuar.", true);
+      console.log("✘ Corrige los campos marcados en rojo antes de continuar.");
+    }
+  });
+
+  // -------- Demo de formatearMoneda --------
+  document.getElementById("btnFormatear").addEventListener("click", () => {
+    const consolaMoneda = document.getElementById("consolaMoneda");
+    const valor = document.getElementById("montoInput").value;
+    const resultado = formatearMoneda(valor, "MXN");
+    const texto = resultado
+      ? `formatearMoneda(${valor}, "MXN") -> "${resultado}"`
+      : `formatearMoneda(${valor}, "MXN") -> "" (número inválido)`;
+    consolaMoneda.textContent = texto;
+    console.log(texto);
+  });
+</script>
+
+</body>
+</html>

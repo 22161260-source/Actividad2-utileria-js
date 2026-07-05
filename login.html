@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Utilería.js — Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <span class="topbar__mark">JS</span>
+    <div>
+      <h1>Utilería.js</h1>
+      <p>Login demo — usa validarCorreo() y validarPassword()</p>
+    </div>
+  </div>
+</header>
+
+<main style="max-width: 440px;">
+
+  <section class="panel">
+    <p class="panel__label">Acceso</p>
+    <h2>Iniciar sesión</h2>
+
+    <form id="formLogin" novalidate>
+      <div class="campo">
+        <label for="correoLogin">Correo electrónico</label>
+        <input type="email" id="correoLogin" placeholder="tucorreo@dominio.com" />
+        <div class="error-msg" id="errorCorreoLogin"></div>
+      </div>
+
+      <div class="campo">
+        <label for="passwordLogin">Contraseña</label>
+        <input type="password" id="passwordLogin" placeholder="Tu contraseña" />
+        <div class="error-msg" id="errorPasswordLogin"></div>
+      </div>
+
+      <button type="submit" class="btn" style="width:100%;">Entrar</button>
+    </form>
+
+    <div class="console" id="consolaLogin" style="margin-top:18px;">// El resultado del intento de acceso aparecerá aquí</div>
+
+    <p style="text-align:center; margin-top:16px;">
+      <a href="index.html" style="color:var(--accent); font-size:0.85rem;">&larr; Volver al formulario</a>
+    </p>
+  </section>
+
+</main>
+
+<footer>
+  utileria.js · repositorio en GitHub · demo desplegada con GitHub Pages
+</footer>
+
+<script src="js/utileria.js"></script>
+<script>
+  const inputCorreoLogin = document.getElementById("correoLogin");
+  const inputPasswordLogin = document.getElementById("passwordLogin");
+  const errorCorreoLogin = document.getElementById("errorCorreoLogin");
+  const errorPasswordLogin = document.getElementById("errorPasswordLogin");
+  const consolaLogin = document.getElementById("consolaLogin");
+
+  inputCorreoLogin.addEventListener("input", () => {
+    if (inputCorreoLogin.value === "") {
+      errorCorreoLogin.textContent = "";
+      return;
+    }
+    errorCorreoLogin.textContent = validarCorreo(inputCorreoLogin.value)
+      ? ""
+      : "Formato de correo inválido.";
+  });
+
+  inputPasswordLogin.addEventListener("input", () => {
+    if (inputPasswordLogin.value === "") {
+      errorPasswordLogin.textContent = "";
+      return;
+    }
+    errorPasswordLogin.textContent = validarPassword(inputPasswordLogin.value)
+      ? ""
+      : "Debe tener 8+ caracteres, mayúscula, minúscula, número y carácter especial.";
+  });
+
+  document.getElementById("formLogin").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const correo = inputCorreoLogin.value;
+    const password = inputPasswordLogin.value;
+
+    const correoValido = validarCorreo(correo);
+    const passwordValida = validarPassword(password);
+
+    consolaLogin.innerHTML = "";
+
+    console.log("===== Resultado de validación del login =====");
+    console.log(`validarCorreo("${correo}") -> ${correoValido}`);
+    console.log(`validarPassword(password) -> ${passwordValida}`);
+
+    const lineaCorreo = document.createElement("div");
+    lineaCorreo.textContent = `validarCorreo("${correo}") -> ${correoValido}`;
+    if (!correoValido) lineaCorreo.className = "linea-error";
+    consolaLogin.appendChild(lineaCorreo);
+
+    const lineaPassword = document.createElement("div");
+    lineaPassword.textContent = `validarPassword(password) -> ${passwordValida}`;
+    if (!passwordValida) lineaPassword.className = "linea-error";
+    consolaLogin.appendChild(lineaPassword);
+
+    const lineaFinal = document.createElement("div");
+    if (correoValido && passwordValida) {
+      lineaFinal.textContent = "✔ Acceso concedido (demo, sin backend real).";
+      console.log("✔ Acceso concedido (demo, sin backend real).");
+    } else {
+      lineaFinal.textContent = "✘ Acceso denegado. Revisa los campos marcados.";
+      lineaFinal.className = "linea-error";
+      console.log("✘ Acceso denegado. Revisa los campos marcados.");
+    }
+    consolaLogin.appendChild(lineaFinal);
+  });
+</script>
+
+</body>
+</html>
