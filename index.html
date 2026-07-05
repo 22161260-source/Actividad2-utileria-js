@@ -22,7 +22,6 @@
 
 <main>
 
-  <!-- ============ FORMULARIO ============ -->
   <section class="panel">
     <p class="panel__label">Formulario de registro</p>
     <h2>Prueba las validaciones en vivo</h2>
@@ -74,14 +73,12 @@
     </form>
   </section>
 
-  <!-- ============ CONSOLA DE RESULTADOS (visual en la página) ============ -->
   <section class="panel">
     <p class="panel__label">Salida</p>
     <h2>Resultado de validación</h2>
     <div class="console" id="consola">// Los resultados de validarCorreo(), soloLetras(), etc. aparecerán aquí</div>
   </section>
 
-  <!-- ============ DEMO DE FUNCIONES LIBRES ============ -->
   <section class="panel">
     <p class="panel__label">Sección libre</p>
     <h2>formatearMoneda(numero, moneda)</h2>
@@ -99,7 +96,6 @@
 
 </main>
 
-<!-- ============ MODAL DE EDAD ============ -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="modal">
     <p class="modal__icono">Edad calculada</p>
@@ -132,7 +128,6 @@
     consola.innerHTML = "";
   }
 
-  // -------- Validación en vivo: nombre (soloLetras) --------
   const inputNombre = document.getElementById("nombre");
   const errorNombre = document.getElementById("errorNombre");
   inputNombre.addEventListener("input", () => {
@@ -145,7 +140,6 @@
       : "Solo se permiten letras y espacios.";
   });
 
-  // -------- Validación en vivo: correo (validarCorreo) --------
   const inputCorreo = document.getElementById("correo");
   const errorCorreo = document.getElementById("errorCorreo");
   inputCorreo.addEventListener("input", () => {
@@ -158,7 +152,6 @@
       : "Formato de correo inválido.";
   });
 
-  // -------- Validación en vivo: teléfono (validarLongitud, exactamente 10 dígitos) --------
   const inputTelefono = document.getElementById("telefono");
   const errorTelefono = document.getElementById("errorTelefono");
   inputTelefono.addEventListener("input", () => {
@@ -171,7 +164,6 @@
     errorTelefono.textContent = esValido ? "" : "El teléfono debe tener exactamente 10 dígitos.";
   });
 
-  // -------- Fecha de nacimiento: dispara el modal (calcularEdad / esMayorDeEdad) --------
   const inputFecha = document.getElementById("fechaNacimiento");
   const errorFecha = document.getElementById("errorFecha");
 
@@ -202,7 +194,6 @@
     modalOverlay.classList.remove("activo");
   });
 
-  // -------- Contraseña: requisitos en vivo (validarPassword) --------
   const inputPassword = document.getElementById("password");
   const requisitos = document.querySelectorAll("#listaRequisitos li");
 
@@ -229,7 +220,6 @@
     console.log(`generarPasswordSegura(12) -> "${nueva}"`);
   });
 
-  // -------- Envío del formulario: corre TODAS las validaciones obligatorias --------
   document.getElementById("formRegistro").addEventListener("submit", (e) => {
     e.preventDefault();
     limpiarConsola();
@@ -267,7 +257,6 @@
     }
   });
 
-  // -------- Demo de formatearMoneda --------
   document.getElementById("btnFormatear").addEventListener("click", () => {
     const consolaMoneda = document.getElementById("consolaMoneda");
     const valor = document.getElementById("montoInput").value;
