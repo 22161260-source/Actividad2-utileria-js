@@ -1,5 +1,4 @@
-# Utilería.js
-##Vargas Vicente Ivonee Montserrat 
+# Utilería.js Vargas Vicente Ivonee Montserrat 
 
 ### Librería JavaScript funcional para validaciones de formularios
 
