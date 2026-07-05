@@ -87,7 +87,7 @@ formatearMoneda(999, "USD");
 
 ---
 
-## 📸 Capturas de pantalla
+##  Capturas de pantalla
 
 **Formulario con validaciones en vivo**
 
