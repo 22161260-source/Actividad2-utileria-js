@@ -137,6 +137,3 @@ formatearMoneda(999, "USD");
 
 ---
 
-## ✍️ Autor
-
-(Tu nombre aquí) — Proyecto individual.
