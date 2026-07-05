@@ -116,7 +116,7 @@ formatearMoneda(999, "USD");
 
 [Ver formulario, modal y login funcionando](https://22161260-source.github.io/Actividad2-utileria-js/)
 
-[Repositorio en GitHub](AQUI_VA_EL_LINK_DEL_REPOSITORIO)
+[Repositorio en GitHub](https://github.com/22161260-source/Actividad2-utileria-js)
 
 ---
 
