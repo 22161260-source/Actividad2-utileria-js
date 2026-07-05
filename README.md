@@ -108,7 +108,7 @@ formatearMoneda(999, "USD");
 
 ## Video demo
 
- [Ver video demo (máx. 1 min)](https://drive.google.com/file/d/1cgUVxqcGPj4OEHDg0l32_gVCT1v1PPH5/view?usp=sharing)
+ [Ver video demo ](https://drive.google.com/file/d/1cgUVxqcGPj4OEHDg0l32_gVCT1v1PPH5/view?usp=sharing)
 
 ---
 
