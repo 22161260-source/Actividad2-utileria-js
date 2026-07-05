@@ -15,65 +15,65 @@ Todas las funciones quedan disponibles globalmente (`validarCorreo`, `soloLetras
 Valida el formato de un correo electrónico.
 
 ```js
-validarCorreo("ana@mail.com");   // true
-validarCorreo("ana@mail");       // false
-validarCorreo("ana.mail.com");   // false
+validarCorreo("ana@mail.com");   
+validarCorreo("ana@mail");       
+validarCorreo("ana.mail.com");   
 ```
 
 ### 2. `soloLetras(texto)`
 Verifica que un texto solo tenga letras (incluye acentos, ñ y espacios).
 
 ```js
-soloLetras("María José"); // true
-soloLetras("Peña");       // true
-soloLetras("Juan123");    // false
+soloLetras("María José"); 
+soloLetras("Peña");       
+soloLetras("Juan123");    
 ```
 
 ### 3. `validarLongitud(numero, maxLongitud)`
 Valida que un número no exceda una cantidad máxima de dígitos.
 
 ```js
-validarLongitud(5512345678, 10); // true
-validarLongitud("123456789012", 10); // false
+validarLongitud(5512345678, 10); 
+validarLongitud("123456789012", 10);
 ```
 
 ### 4. `calcularEdad(fechaNacimiento)`
 Calcula la edad en años cumplidos a partir de una fecha.
 
 ```js
-calcularEdad("2000-06-15"); // 26 (depende de la fecha actual)
+calcularEdad("2000-06-15"); 
 ```
 
 ### 5. `esMayorDeEdad(fechaNacimiento)`
 Indica si una persona es mayor de edad (18+).
 
 ```js
-esMayorDeEdad("2010-01-01"); // false
-esMayorDeEdad("1990-05-20"); // true
+esMayorDeEdad("2010-01-01"); 
+esMayorDeEdad("1990-05-20"); 
 ```
 
 ### 6. `validarPassword(password)`
 Exige mayúscula, minúscula, número, carácter especial y 8+ caracteres.
 
 ```js
-validarPassword("Abcdef1!"); // true
-validarPassword("abcdefgh"); // false
+validarPassword("Abcdef1!"); 
+validarPassword("abcdefgh"); 
 ```
 
 ### 7. `generarPasswordSegura(longitud)` — función libre
 Genera automáticamente una contraseña aleatoria que siempre cumple `validarPassword()`. Resuelve el problema de que a los usuarios les cuesta inventar una contraseña segura.
 
 ```js
-const pass = generarPasswordSegura(12); // ej. "jCNemqr(5M2x"
-validarPassword(pass); // true
+const pass = generarPasswordSegura(12); 
+validarPassword(pass); 
 ```
 
 ### 8. `formatearMoneda(numero, moneda)` — función libre
 Da formato de moneda legible (separador de miles, 2 decimales, símbolo).
 
 ```js
-formatearMoneda(1234.5);        // "$1,234.50"
-formatearMoneda(999, "USD");    // "$999.00"
+formatearMoneda(1234.5);        
+formatearMoneda(999, "USD");    
 ```
 
 ---
