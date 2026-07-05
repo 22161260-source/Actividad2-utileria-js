@@ -1,27 +1,16 @@
 # Utilería.js
+#Vargas Vicente Ivonee Montserrat 
 
 ### Librería JavaScript funcional para validaciones de formularios
 
 **¿Qué problema resuelve?**
 Cada vez que se construye un formulario web hay que repetir el mismo código una y otra vez: validar que un correo tenga formato correcto, que un nombre no lleve números, que una contraseña sea segura, o calcular la edad a partir de una fecha de nacimiento. **Utilería.js** junta todas esas validaciones comunes en un solo archivo, sin frameworks ni dependencias, listo para usarse con una sola línea de `<script>`.
 
-Incluye además dos utilidades extra para generar contraseñas seguras automáticamente y formatear cantidades como moneda.
-
----
-
-## 📦 Instalación
-
-No requiere instalación de paquetes ni build. Solo copia el archivo `js/utileria.js` a tu proyecto y agrégalo antes de tu propio script:
-
-```html
-<script src="utileria.js"></script>
-```
-
 Todas las funciones quedan disponibles globalmente (`validarCorreo`, `soloLetras`, etc.) listas para usarse en cualquier archivo `.js` de tu proyecto o directamente en un `<script>` dentro del HTML.
 
 ---
 
-## 🚀 Uso
+## Uso
 
 ### 1. `validarCorreo(correo)`
 Valida el formato de un correo electrónico.
@@ -90,7 +79,7 @@ formatearMoneda(999, "USD");    // "$999.00"
 
 ---
 
-## 🖥️ Integración en vivo
+## Integración en vivo
 
 | Página | Qué hace |
 |---|---|
@@ -103,37 +92,36 @@ formatearMoneda(999, "USD");    // "$999.00"
 
 **Formulario con validaciones en vivo**
 
-![Formulario](img/screenshot-form.png)
+<img width="710" height="625" alt="Captura de pantalla 2026-07-04 171750" src="https://github.com/user-attachments/assets/c9665f3d-ad70-4e2b-8b43-41b539cd04c8" />
+
 
 **Modal mostrando la edad calculada**
 
-![Modal de edad](img/screenshot-modal.png)
+<img width="777" height="531" alt="Captura de pantalla 2026-07-04 172020" src="https://github.com/user-attachments/assets/cba257a6-3b6a-4ddc-b311-dcc9c8b1658b" />
 
-**Consola del navegador mostrando el resultado de las validaciones**
-
-![Consola de resultados](img/screenshot-consola.png)
 
 **Login usando `validarCorreo()` y `validarPassword()`**
 
-![Login](img/screenshot-login.png)
+<img width="1332" height="683" alt="Captura de pantalla 2026-07-04 171235" src="https://github.com/user-attachments/assets/03fb2384-5093-45ff-a161-02886a2c564d" />
+
 
 ---
 
-## 🎥 Video demo
+## Video demo
 
-📺 [Ver video demo (máx. 1 min)](AQUI_VA_EL_LINK_DEL_VIDEO)
-
----
-
-## 🌐 Demo en vivo (GitHub Pages)
-
-🔗 [Ver formulario, modal y login funcionando](AQUI_VA_EL_LINK_DE_GITHUB_PAGES)
-
-🔗 [Repositorio en GitHub](AQUI_VA_EL_LINK_DEL_REPOSITORIO)
+ [Ver video demo (máx. 1 min)](AQUI_VA_EL_LINK_DEL_VIDEO)
 
 ---
 
-## 📁 Estructura del proyecto
+## Demo en vivo (GitHub Pages)
+
+[Ver formulario, modal y login funcionando](AQUI_VA_EL_LINK_DE_GITHUB_PAGES)
+
+[Repositorio en GitHub](AQUI_VA_EL_LINK_DEL_REPOSITORIO)
+
+---
+
+##  Estructura del proyecto
 
 ```
 /utileria
