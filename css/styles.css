@@ -1,8 +1,4 @@
-/* ============================================================================
-   UTILERÍA.JS — hoja de estilos
-   Identidad visual: "caja de herramientas de desarrollador"
-   Paleta: grafito + ámbar de seguridad
-   ============================================================================ */
+
 
 :root {
   --bg: #1c1f26;
@@ -33,7 +29,7 @@ body {
   line-height: 1.5;
 }
 
-/* ---------- Encabezado tipo "placa metálica" ---------- */
+
 .topbar {
   background: linear-gradient(180deg, var(--panel-2), var(--panel));
   border-bottom: 3px solid var(--accent);
@@ -72,7 +68,6 @@ body {
   font-size: 0.9rem;
 }
 
-/* ---------- Layout general ---------- */
 main {
   max-width: 960px;
   margin: 0 auto;
@@ -103,7 +98,6 @@ main {
   font-size: 1.25rem;
 }
 
-/* ---------- Formulario ---------- */
 .campo {
   margin-bottom: 16px;
 }
@@ -186,7 +180,6 @@ input:focus {
   color: var(--accent);
 }
 
-/* ---------- Modal ---------- */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -251,7 +244,6 @@ input:focus {
   color: var(--text-muted);
 }
 
-/* ---------- Consola / salida tipo terminal ---------- */
 .console {
   background: #14161b;
   border: 1px solid var(--border);
@@ -269,7 +261,6 @@ input:focus {
   color: var(--error);
 }
 
-/* ---------- Requisitos de contraseña ---------- */
 .requisitos {
   list-style: none;
   padding: 0;
@@ -295,7 +286,6 @@ input:focus {
   color: var(--success);
 }
 
-/* ---------- Footer ---------- */
 footer {
   text-align: center;
   color: var(--text-muted);
@@ -308,7 +298,6 @@ footer a {
   color: var(--accent);
 }
 
-/* ---------- Utilidades ---------- */
 .fila {
   display: flex;
   gap: 12px;
